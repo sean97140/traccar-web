@@ -383,7 +383,6 @@
     "alarmConnection": "Connected",
     "alarmOffline": "Offline",
     "alarmOverDistance": "Ankle Braclet Over Distance",
-    "alarmBaseStationForAnkleMonitorIsBeingMoved": "Base Station Moved",
     "alarmCharging": "Charging",
     "alarmGravitySwitch": "Gravity Switch",
     "alarmCoordinatesOutOfBounds": "Coordinates Out of Bounds",
