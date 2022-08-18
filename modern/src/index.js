@@ -1,19 +1,39 @@
 import 'typeface-roboto';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { CssBaseline, ThemeProvider, StyledEngineProvider } from '@mui/material';
 import store from './store';
+import { LocalizationProvider } from './common/components/LocalizationProvider';
+import ErrorHandler from './common/components/ErrorHandler';
+import theme from './common/theme';
+import Navigation from './Navigation';
+import preloadImages from './map/core/preloadImages';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import NativeInterface from './common/components/NativeInterface';
+import ServerProvider from './ServerProvider';
 
-ReactDOM.render((
+preloadImages();
+
+const root = createRoot(document.getElementById('root'));
+root.render(
   <Provider store={store}>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </Provider>
-), document.getElementById('root'));
+    <LocalizationProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <ServerProvider>
+            <BrowserRouter>
+              <Navigation />
+            </BrowserRouter>
+          </ServerProvider>
+          <ErrorHandler />
+          <NativeInterface />
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </LocalizationProvider>
+  </Provider>,
+);
 
-serviceWorker.register();
+serviceWorkerRegistration.register();
